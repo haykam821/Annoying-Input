@@ -4,8 +4,8 @@ class CharSliderElement extends HTMLElement {
 
         this.style.display = "block";
 
-        this.mustReset = this.hasAttribute("must-reset");
-        this.confirm = this.hasAttribute("confirm");
+        this.mustReset = this.hasAttribute("must-reset") || false;
+        this.confirm = this.hasAttribute("confirm") || false;
         
         this.childInput = document.createElement("input");
 
