@@ -5,22 +5,46 @@ class CharSliderElement extends HTMLElement {
         this.style.display = "block";
 
         this.mustReset = this.hasAttribute("must-reset") || false;
-        this.confirm = this.hasAttribute("confirm") || false;
+		this.confirm = this.hasAttribute("confirm") || false;
+		this.shift = this.hasAttribute("shift") || false;
         
-        this.childInput = document.createElement("input");
+		this.childInput = document.createElement("input");
+		this.childInput.disabled = this.shift;
 
         this.childInput.type = "range";
 
         this.childInput.min = 31;
         this.childInput.max = 122;
 
-        this.childInput.value = this.childInput.min;
+		this.childInput.value = this.childInput.min;
+		
+		if (this.shift) {
+			this.leftButton = document.createElement("button");
+			this.leftButton.innerText = "-";
+			this.leftButton.addEventListener("click", () => {
+				this.childInput.value -= 1;
+				this.updateLabel();
+			});
 
-        this.appendChild(this.childInput);
+			this.appendChild(this.leftButton);
+		}
 
-        const childLabel = document.createElement("button");
-        childLabel.innerText = this.charCode(this.childInput.value)[1];
-        this.appendChild(childLabel);
+		this.appendChild(this.childInput);
+
+		if (this.shift) {
+			this.rightButton = document.createElement("button");
+			this.rightButton.innerText = "+";
+			this.rightButton.addEventListener("click", () => {
+				this.childInput.value = parseInt(this.childInput.value) + 1;
+				this.updateLabel();
+			});
+
+			this.appendChild(this.rightButton);
+		}
+
+        this.childLabel = document.createElement("button");
+        this.childLabel.innerText = this.charCode(this.childInput.value)[1];
+        this.appendChild(this.childLabel);
 
         this.appendChild(document.createElement("br"));
 
@@ -30,10 +54,8 @@ class CharSliderElement extends HTMLElement {
         this.childFinish.readOnly = true;
         this.appendChild(this.childFinish);
 
-        this.childInput.addEventListener("input", event => {
-            childLabel.innerText = this.charCode(this.childInput.value)[1];
-        });
-        childLabel.addEventListener("click", () => {
+        this.childInput.addEventListener("input", this.updateLabel);
+        this.childLabel.addEventListener("click", () => {
             if (this.confirm && !confirm("Are you sure?")) {
                 return;
             }
@@ -60,7 +82,12 @@ class CharSliderElement extends HTMLElement {
             default:
                 return [String.fromCharCode(code), String.fromCharCode(code)];
         }
-    }
+	}
+
+	updateLabel() {
+		console.log(this)
+		return this.childLabel.innerText = this.charCode(this.childInput.value)[1];
+	}
 
     get value() {
         return this.childFinish.value;
