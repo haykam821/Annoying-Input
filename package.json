@@ -4,6 +4,7 @@
 	"description": "A collection of HTML input elements that are bad or annoying in general.",
 	"main": "index.js",
 	"scripts": {
+		"lint": "eslint \"./**/*.js\" --ignore-path .gitignore",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -20,5 +21,15 @@
 	"bugs": {
 		"url": "https://github.com/haykam821/Annoying-Input/issues"
 	},
-	"homepage": "https://github.com/haykam821/Annoying-Input#readme"
+	"homepage": "https://github.com/haykam821/Annoying-Input#readme",
+	"devDependencies": {
+		"eslint": "^8.19.0",
+		"eslint-config-haykam": "^1.18.0"
+	},
+	"eslintConfig": {
+		"extends": "eslint-config-haykam",
+		"env": {
+			"browser": true
+		}
+	}
 }
