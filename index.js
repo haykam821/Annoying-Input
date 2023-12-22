@@ -63,24 +63,30 @@ class CharSliderElement extends HTMLElement {
 			const rawVal = this.charCode(this.childInput.value)[0];
 
 			switch (rawVal) {
-				case null:
+				case null: {
 					return this.childFinish.value = null;
-				case "\b":
+				}
+				case "\b": {
 					return this.childFinish.value = this.childFinish.value.slice(0, -1);
-				default:
+				}
+				default: {
 					return this.childFinish.value += this.charCode(this.childInput.value)[0];
+				}
 			}
 		});
 	}
 
 	charCode(code) {
 		switch (code) {
-			case "31":
+			case "31": {
 				return this.mustReset ? [null, "Reset"] : ["\b", "Backspace"];
-			case "32":
+			}
+			case "32": {
 				return [" ", "Space"];
-			default:
+			}
+			default: {
 				return [String.fromCodePoint(code), String.fromCodePoint(code)];
+			}
 		}
 	}
 

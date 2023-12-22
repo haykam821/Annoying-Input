@@ -23,8 +23,8 @@
 	},
 	"homepage": "https://github.com/haykam821/Annoying-Input#readme",
 	"devDependencies": {
-		"eslint": "^8.19.0",
-		"eslint-config-haykam": "^1.18.0"
+		"eslint": "^8.56.0",
+		"eslint-config-haykam": "^1.21.0"
 	},
 	"eslintConfig": {
 		"extends": "eslint-config-haykam",
