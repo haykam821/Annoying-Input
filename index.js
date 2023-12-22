@@ -54,7 +54,7 @@ class CharSliderElement extends HTMLElement {
 		this.childFinish.readOnly = true;
 		this.append(this.childFinish);
 
-		this.childInput.addEventListener("input", this.updateLabel);
+		this.childInput.addEventListener("input", () => this.updateLabel());
 		this.childLabel.addEventListener("click", () => {
 			if (this.confirm && !confirm("Are you sure?")) {
 				return;
